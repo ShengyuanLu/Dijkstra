@@ -7,10 +7,10 @@ class SDijkstraTest {
   def testDirect() {
 
     val graph = Map(
-      new SNode("A", Int.MaxValue) -> List(new SNode("B", 2), new SNode("C", 1)),
-      new SNode("B", Int.MaxValue) -> List(new SNode("A", 2), new SNode("D", 2)),
-      new SNode("C", Int.MaxValue) -> List(new SNode("A", 1), new SNode("D", 3)),
-      new SNode("D", Int.MaxValue) -> List(new SNode("B", 2), new SNode("C", 3))
+      new Node("A", Int.MaxValue) -> List(new Node("B", 2), new Node("C", 1)),
+      new Node("B", Int.MaxValue) -> List(new Node("A", 2), new Node("D", 2)),
+      new Node("C", Int.MaxValue) -> List(new Node("A", 1), new Node("D", 3)),
+      new Node("D", Int.MaxValue) -> List(new Node("B", 2), new Node("C", 3))
     )
 
     val l = SDijkstra.dijkstra(graph, "A", "C")
@@ -22,10 +22,10 @@ class SDijkstraTest {
   def testUnDirect() {
 
     val graph = Map(
-      new SNode("A", Int.MaxValue) -> List(new SNode("B", 1), new SNode("C", 10)),
-      new SNode("B", Int.MaxValue) -> List(new SNode("A", 1), new SNode("D", 2)),
-      new SNode("C", Int.MaxValue) -> List(new SNode("A", 10), new SNode("D", 3)),
-      new SNode("D", Int.MaxValue) -> List(new SNode("B", 2), new SNode("C", 3))
+      new Node("A", Int.MaxValue) -> List(new Node("B", 1), new Node("C", 10)),
+      new Node("B", Int.MaxValue) -> List(new Node("A", 1), new Node("D", 2)),
+      new Node("C", Int.MaxValue) -> List(new Node("A", 10), new Node("D", 3)),
+      new Node("D", Int.MaxValue) -> List(new Node("B", 2), new Node("C", 3))
     )
 
     val l = SDijkstra.dijkstra(graph, "A", "C")

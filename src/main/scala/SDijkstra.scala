@@ -2,8 +2,8 @@ import scala.collection.mutable.LinkedHashMap
 
 object SDijkstra {
 
-  def dijkstra(graph: Map[SNode, List[SNode]], start: String, end: String): List[SNode] = {
-    val path = new LinkedHashMap[SNode, SNode]
+  def dijkstra(graph: Map[Node, List[Node]], start: String, end: String): List[Node] = {
+    val path = new LinkedHashMap[Node, Node]
     var bigSQueue = graph.keySet.filter(_.name != start).toList
     var top = graph.keySet.find(_.name == start).get
     top.distance = 0
@@ -32,8 +32,8 @@ object SDijkstra {
     null
   }
 
-  def parse(path: LinkedHashMap[SNode, SNode], end: SNode): List[SNode] = {
-    var result = List[SNode]()
+  def parse(path: LinkedHashMap[Node, Node], end: Node): List[Node] = {
+    var result = List[Node]()
     var n = end
     while (path.get(n).isDefined) {
       result = result :+ n
