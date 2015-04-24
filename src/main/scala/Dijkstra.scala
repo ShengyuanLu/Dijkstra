@@ -2,28 +2,28 @@ import scala.collection.mutable.LinkedHashMap
 
 object Dijkstra {
 
-  def dijkstra(graph: Map[Node, List[Node]], start: String, end: String): List[Node] = {
-    val path = new LinkedHashMap[Node, Node]
+  def dijkstra(graph: Map[AdjNode, List[Node]], start: String, end: String): List[AdjNode] = {
+    val path = new LinkedHashMap[AdjNode, AdjNode]
     var bigSQueue = graph.keySet.filter(_.name != start).toList
     var top = graph.keySet.find(_.name == start).get
-    top.distance = 0
+    top.accumulateDistance = 0
     path += (top -> null)
 
     while (bigSQueue.nonEmpty) {
-      val adj = graph.get(top).get.intersect(bigSQueue)
+      val adj = graph.get(top).get.intersect(bigSQueue)  //Nodes intersect AdjNode of Q
       adj.foreach(
         (v) => {
-          val candi = bigSQueue.find(_ == v).get
-          val sum = top.distance + v.distance
-          candi.distance = if (sum < candi.distance) sum
-          else candi.distance
+          val candi = bigSQueue.find(_ == v).get    // Node -> AdjNode
+          val sum = top.accumulateDistance + v.distance
+          candi.accumulateDistance = if (sum < candi.accumulateDistance) sum
+                                     else candi.accumulateDistance
         }
       )
 
-      top = bigSQueue.minBy(_.distance)
+      top = bigSQueue.minBy(_.accumulateDistance)
       path += (top -> path.keySet.last)
       if (top.name == end) {
-        return if (top.distance == Int.MaxValue) List(top)
+        return if (top.accumulateDistance == Int.MaxValue) List(top)
         else parse(path, top)
       }
 
@@ -32,8 +32,8 @@ object Dijkstra {
     null
   }
 
-  def parse(path: LinkedHashMap[Node, Node], end: Node): List[Node] = {
-    var result = List[Node]()
+  def parse(path: LinkedHashMap[AdjNode, AdjNode], end: AdjNode): List[AdjNode] = {
+    var result = List[AdjNode]()
     var n = end
     while (path.get(n).isDefined) {
       result = result :+ n

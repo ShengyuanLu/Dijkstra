@@ -1,11 +1,8 @@
-class Node(var name: String, var distance: Int) {
-
-  def canEqual(other: Any): Boolean = other.isInstanceOf[Node]
+class Node(val name: String, val distance: Int) {
 
   override def equals(other: Any): Boolean = other match {
-    case that: Node =>
-      (that canEqual this) &&
-        name == that.name
+    case that: AdjNode => name == that.name
+    case that:    Node => name == that.name
     case _ => false
   }
 
@@ -15,4 +12,21 @@ class Node(var name: String, var distance: Int) {
   }
 
   override def toString = s"Node($name, $distance)"
+}
+
+
+class AdjNode(val name: String, var accumulateDistance: Int) {
+
+  override def equals(other: Any): Boolean = other match {
+    case that: AdjNode => name == that.name
+    case that:    Node => name == that.name
+    case _ => false
+  }
+
+  override def hashCode(): Int = {
+    val state = Seq(name)
+    state.map(_.hashCode()).foldLeft(0)((a, b) => 31 * a + b)
+  }
+
+  override def toString = s"AdjNode($name, $accumulateDistance)"
 }
