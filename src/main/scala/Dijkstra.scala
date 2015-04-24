@@ -1,6 +1,6 @@
 import scala.collection.mutable.LinkedHashMap
 
-object SDijkstra {
+object Dijkstra {
 
   def dijkstra(graph: Map[Node, List[Node]], start: String, end: String): List[Node] = {
     val path = new LinkedHashMap[Node, Node]

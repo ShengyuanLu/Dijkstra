@@ -1,7 +1,7 @@
 
 import org.junit.{Test, Assert}
 
-class SDijkstraTest {
+class DijkstraTest {
 
   @Test
   def testDirect() {
@@ -13,7 +13,7 @@ class SDijkstraTest {
       new Node("D", Int.MaxValue) -> List(new Node("B", 2), new Node("C", 3))
     )
 
-    val l = SDijkstra.dijkstra(graph, "A", "C")
+    val l = Dijkstra.dijkstra(graph, "A", "C")
 
     Assert.assertEquals(1, l.last.distance)
   }
@@ -28,7 +28,7 @@ class SDijkstraTest {
       new Node("D", Int.MaxValue) -> List(new Node("B", 2), new Node("C", 3))
     )
 
-    val l = SDijkstra.dijkstra(graph, "A", "C")
+    val l = Dijkstra.dijkstra(graph, "A", "C")
     Assert.assertEquals(6, l.last.distance)
 
   }
