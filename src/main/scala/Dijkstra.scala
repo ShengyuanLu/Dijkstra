@@ -1,9 +1,10 @@
 import scala.collection.mutable.LinkedHashMap
+import scala.collection.parallel.immutable
 
 object Dijkstra {
 
   def dijkstra(graph: Map[AdjNode, List[Node]], start: String, end: String): List[AdjNode] = {
-    val path = new LinkedHashMap[AdjNode, AdjNode]
+    var path: Map[AdjNode, AdjNode] = Map()
     var bigSQueue = graph.keySet.filter(_.name != start).toList
     var top = graph.keySet.find(_.name == start).get
     top.accumulateDistance = 0
@@ -32,7 +33,7 @@ object Dijkstra {
     null
   }
 
-  def parse(path: LinkedHashMap[AdjNode, AdjNode], end: AdjNode): List[AdjNode] = {
+  def parse(path: Map[AdjNode, AdjNode], end: AdjNode): List[AdjNode] = {
     var result = List[AdjNode]()
     var n = end
     while (path.get(n).isDefined) {
