@@ -35,11 +35,10 @@ object Dijkstra {
   }
 
   def parse(path: mutable.LinkedHashMap[AdjNode, AdjNode], key: AdjNode): List[AdjNode] = {
-    if (key == null) {
-      Nil
-    } else {
-      val value = path.get(key).get //Value is pre-Node
-      key :: parse(path -= key, value)
+    key match {
+      case null => Nil
+      case    _ =>  val value = path.get(key).get //Value is pre-Node
+                    key :: parse(path -= key, value)
     }
   }
 
