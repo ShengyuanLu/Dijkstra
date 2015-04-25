@@ -1,8 +1,11 @@
 
+
+import scala.collection.mutable
+
 object Dijkstra {
 
   def dijkstra(graph: Map[AdjNode, List[Node]], start: String, end: String): List[AdjNode] = {
-    var path: Map[AdjNode, AdjNode] = Map()
+    var path = new  mutable.LinkedHashMap[AdjNode, AdjNode]()
     var bigSQueue = graph.keySet.filter(_.name != start).toList
     var top = graph.keySet.find(_.name == start).get
     top.accumulateDistance = 0
@@ -23,7 +26,7 @@ object Dijkstra {
       path += (top -> path.keySet.last)
       if (top.name == end) {
         return if (top.accumulateDistance == Int.MaxValue) List(top)
-        else parse(path, top)
+               else parse(path, path.keySet.last).reverse
       }
 
       bigSQueue = bigSQueue.diff(List(top))
@@ -31,14 +34,13 @@ object Dijkstra {
     null
   }
 
-  def parse(path: Map[AdjNode, AdjNode], end: AdjNode): List[AdjNode] = {
-    var result = List[AdjNode]()
-    var n = end
-    while (path.get(n).isDefined) {
-      result = result :+ n
-      n = path.get(n).get
+  def parse(path: mutable.LinkedHashMap[AdjNode, AdjNode], key: AdjNode): List[AdjNode] = {
+    if (key == null) {
+      Nil
+    } else {
+      val value = path.get(key).get //Value is pre-Node
+      key :: parse(path -= key, value)
     }
-    result.reverse
   }
 
 }
