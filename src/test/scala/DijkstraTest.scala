@@ -7,10 +7,10 @@ class DijkstraTest {
   def testDirect() {
 
     val graph = Map(
-      new AdjNode("A", Int.MaxValue) -> List(new Node("B", 2), new Node("C", 1)),
-      new AdjNode("B", Int.MaxValue) -> List(new Node("A", 2), new Node("D", 2)),
-      new AdjNode("C", Int.MaxValue) -> List(new Node("A", 1), new Node("D", 3)),
-      new AdjNode("D", Int.MaxValue) -> List(new Node("B", 2), new Node("C", 3))
+        AdjNode("A", Int.MaxValue) -> List( Node("B", 2),  Node("C", 1)),
+        AdjNode("B", Int.MaxValue) -> List( Node("A", 2),  Node("D", 2)),
+        AdjNode("C", Int.MaxValue) -> List( Node("A", 1),  Node("D", 3)),
+        AdjNode("D", Int.MaxValue) -> List( Node("B", 2),  Node("C", 3))
     )
 
     val l = Dijkstra.dijkstra(graph, "A", "C")
@@ -22,10 +22,10 @@ class DijkstraTest {
   def testUnDirect() {
 
     val graph = Map(
-      new AdjNode("A", Int.MaxValue) -> List(new Node("B", 1), new Node("C", 10)),
-      new AdjNode("B", Int.MaxValue) -> List(new Node("A", 1), new Node("D", 2)),
-      new AdjNode("C", Int.MaxValue) -> List(new Node("A", 10), new Node("D", 3)),
-      new AdjNode("D", Int.MaxValue) -> List(new Node("B", 2), new Node("C", 3))
+       AdjNode("A", Int.MaxValue) -> List( Node("B", 1),  Node("C", 10)),
+       AdjNode("B", Int.MaxValue) -> List( Node("A", 1),  Node("D", 2)),
+       AdjNode("C", Int.MaxValue) -> List( Node("A", 10), Node("D", 3)),
+       AdjNode("D", Int.MaxValue) -> List( Node("B", 2),  Node("C", 3))
     )
 
     val l = Dijkstra.dijkstra(graph, "A", "C")

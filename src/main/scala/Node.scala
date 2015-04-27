@@ -13,7 +13,9 @@ class Node(val name: String, val distance: Int) {
 
   override def toString = s"Node($name, $distance)"
 }
-
+object Node {
+  def apply(name: String, distance: Int) = new Node(name, distance)
+}
 
 class AdjNode(val name: String, var accumulateDistance: Int) {
 
@@ -29,4 +31,7 @@ class AdjNode(val name: String, var accumulateDistance: Int) {
   }
 
   override def toString = s"AdjNode($name, $accumulateDistance)"
+}
+object AdjNode {
+     def apply(name: String, accumulateDistance: Int) = new AdjNode(name, accumulateDistance)
 }
